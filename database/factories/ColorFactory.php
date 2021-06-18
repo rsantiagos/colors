@@ -22,10 +22,10 @@ class ColorFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'sand dollar',
-            'color' => '#DECDBE',
-            'pantone' => '13-1106',
-            'year' => '2006',
+            'name' => $this->faker->colorName(),
+            'color' => $this->faker->hexcolor(),
+            'pantone' => $this->faker->numerify('##-####'),
+            'year' => $this->faker->year(),
         ];
     }
 }

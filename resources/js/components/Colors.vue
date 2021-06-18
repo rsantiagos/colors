@@ -1,13 +1,24 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card rounded mb-5">
-                    <div class="card-header">Colores</div>
-
+            <div class="col-md-12">
+                <div class="card rounded">
+                    <div class="card-header text-center"><h1>Colores</h1></div>
+                    <div class="row">
+                        <div class="col-md-4 ms-md-auto">
+                            <div class="input-group flex-nowrap">
+                                <span class="input-group-text" id="addon-wrapping">Items por pagina</span>
+                                <select class="form-select" v-model="per_page" aria-label="Default select example">
+                                    <option value="6">6</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4"  v-for="color in colors" :key="color.id">
+                            <div class="col-md-4 mb-3"  v-for="color in laravelData.data" :key="color.id">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title ">{{color.year}} </h5>
@@ -22,6 +33,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <pagination :data="laravelData" @pagination-change-page="getColors">
+                                    <span slot="prev-nav">&lt; Anterior</span>
+                                    <span slot="next-nav">Siguiente &gt;</span>
+                                </pagination>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -33,21 +53,27 @@
     export default {
         data() {
             return {
-                colors: null
+                per_page: 6,
+                laravelData: {}
             }
         },
         mounted() {
             this.getColors();
         },
         methods: {
-            async getColors() {
+            async getColors(page = 1) {
                 try {
-                    this.colors = (await axios.get('/api/color')).data;
+                    this.laravelData = (await axios.get('/api/color?page=' + page + '&per_page=' + this.per_page)).data;
                 } catch (error) {
                     console.error(error);
                 }
 
             }
         },
+        watch:{
+            per_page(){
+                this.getColors();
+            }
+        }
     }
 </script>

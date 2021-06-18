@@ -14,7 +14,8 @@ class ColorController extends Controller
      */
     public function index()
     {
-        return Color::get();
+        $per_page = \Request::get('per_page') ?: 6;
+        return Color::paginate($per_page);
     }
 
     /**
