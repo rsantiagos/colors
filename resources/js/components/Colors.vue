@@ -35,13 +35,12 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <pagination :data="laravelData" @pagination-change-page="getColors">
+                                <pagination :data="laravelData" @pagination-change-page="getColors" :limit="1" align="center" :show-disabled="true" >
                                     <span slot="prev-nav">&lt; Anterior</span>
                                     <span slot="next-nav">Siguiente &gt;</span>
                                 </pagination>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

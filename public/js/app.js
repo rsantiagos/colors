@@ -1914,7 +1914,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -38982,7 +38981,12 @@ var render = function() {
                   _c(
                     "pagination",
                     {
-                      attrs: { data: _vm.laravelData },
+                      attrs: {
+                        data: _vm.laravelData,
+                        limit: 1,
+                        align: "center",
+                        "show-disabled": true
+                      },
                       on: { "pagination-change-page": _vm.getColors }
                     },
                     [
