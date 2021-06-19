@@ -110,3 +110,7 @@ php artisan migrate:refresh --seed
 ```
 php artisan serve
 ```
+
+
+repositorio del proyecto
+https://github.com/rsantiagos/colors
