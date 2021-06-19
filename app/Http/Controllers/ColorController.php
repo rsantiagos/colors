@@ -51,7 +51,7 @@ class ColorController extends Controller
      */
     public function show(Color $color)
     {
-        //
+        return Color::find($color->id);
     }
 
     /**
@@ -63,7 +63,26 @@ class ColorController extends Controller
      */
     public function update(Request $request, Color $color)
     {
-        //
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'name' => 'required',
+            'color' => 'required',
+            'pantone' => 'required',
+            'year' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Error de validación', $validator->errors());
+        }
+
+        $color->name = $input['name'];
+        $color->color = $input['color'];
+        $color->pantone = $input['pantone'];
+        $color->year = $input['year'];
+        $color->save();
+
+        return $color;
     }
 
     /**
@@ -74,6 +93,6 @@ class ColorController extends Controller
      */
     public function destroy(Color $color)
     {
-        //
+        return $color->delete();
     }
 }

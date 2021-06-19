@@ -15,12 +15,13 @@ use App\Http\Controllers\ColorController;
 |
 */
 
-Route::get('/color', [ColorController::class, 'index']);
+Route::get('/color', [ColorController::class, 'index'])->name('color.index');
+Route::get('/color/{color}', [ColorController::class, 'show'])->name('color.show');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::middleware(['auth','admin'])->group(function () {
-    Route::apiResource('color', ColorController::class)->except('index');
+    Route::apiResource('color', ColorController::class)->except('index', 'show');
 });
