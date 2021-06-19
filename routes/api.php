@@ -20,3 +20,7 @@ Route::get('/color', [ColorController::class, 'index']);
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware(['auth','admin'])->group(function () {
+    Route::apiResource('color', ColorController::class)->except('index');
+});

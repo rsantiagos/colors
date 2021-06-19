@@ -4,6 +4,7 @@
             <div class="col-md-12">
                 <div class="card rounded">
                     <div class="card-header text-center"><h1>Colores</h1></div>
+                    <!-- <button @click="createColor">nuevo color</button> -->
                     <div class="row">
                         <div class="col-md-4 ms-md-auto">
                             <div class="input-group flex-nowrap">
@@ -63,6 +64,21 @@
             async getColors(page = 1) {
                 try {
                     this.laravelData = (await axios.get('/api/color?page=' + page + '&per_page=' + this.per_page)).data;
+                } catch (error) {
+                    console.error(error);
+                }
+
+            },
+            async createColor() {
+                try {
+                    let color = {
+                        name: 'sand dollar',
+                        color: '#DECDBE',
+                        pantone: '13-1106',
+                        year: '2006'
+                    }
+                    await axios.post('/api/color', color).data;
+                    this.getColors();
                 } catch (error) {
                     console.error(error);
                 }

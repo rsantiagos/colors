@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Color;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ColorController extends Controller
 {
@@ -26,7 +27,20 @@ class ColorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+
+        $validator = Validator::make($input, [
+            'name' => 'required',
+            'color' => 'required',
+            'pantone' => 'required',
+            'year' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Error de validación', $validator->errors());
+        }
+
+        return Color::create($input);
     }
 
     /**
