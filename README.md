@@ -1,65 +1,112 @@
+# Administración de colores
+
+## Introduccion de la aplicación
+Se requiere un sistema para la administración y la estandarización de los colores que se van a utilizar para páginas web, nuevos diseños, flyers y hasta para redes sociales.
+
+Para que los demás departamentos y diseñadores puedan tener acceso a los colores, se debe de crear una aplicación en la que se puedan administrar y acceder fácilmente.
+
+### Especificaciones:
+Los colores tienen los siguientes atributos:
 
 
-# DOCUMENTACIÓN DE LARAVEL
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+ID: Numérico, ejemplo: 1
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Name: String, ejemplo: "Sand Dollar"
 
-## About Laravel
+Color: String, Ejemplo: "#DECDBE"
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Pantone: String, Ejemplo: "13-1106"
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Year: Numérico, Ejemplo: 2020
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+El API debe proveer los siguientes métodos:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```
+    GET /colores
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    GET /colores/:id
 
-## Laravel Sponsors
+    POST /colores
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+    PUT /colores/:id
 
-### Premium Partners
+    DELETE /colores/:id
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+Se contará con dos perfiles de acceso al API, usuario y administrador con las siguientes restricciones:
 
-## Contributing
+Los métodos POST, PUT y DELETE únicamente pueden ser accesados por el perfil administrador.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Los métodos GET pueden ser accesados tanto por ambos perfiles.
 
-## Code of Conduct
+El método de listado de colores debe soportar páginación y debe devolver 6 colores por página.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+ADMINISTRADOR: 
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Se debe desarrollar una aplicación para la gestión de colores, en esta se podrán listar, crear, actualizar y eliminar los colores de la compañía,
 
-## License
+La pantalla de listado de colores debe ser conforme al siguiente wireframe. (Ajustar este despliegue de colores para dispositivos con pantallas pequeñas).
+<div align="center">
+    <a href="#">
+       <img width="90%" src="./readme/wireframe-colores.png" alt=''>
+    </a>
+</div>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Debe permitir acceso a usuarios y administradores (se deben tener en cuenta las restricciones del API).
+
+Esta API también podrá ser accesada por otros servicios (únicamente el listado de colores) que debido a distintos requerimientos necesitarán:
+
+Especificar el número de items que desean por página, para esto se deben recibir este número como parámetro y paginar acordemente, es importante que el API retorne valores importantes como página actual, número de páginas, total de elementos.
+
+Especificar si desean recibir un json o un xml como respuesta.
+
+## Listado de tecnologias y frameworks utilizados
+1.- php Version 7.2.x
+
+2.- Node Version 14.x (npm o yarn)
+
+3.- Mysql Version > 5.7
+
+4.- Laravel 8.5.20 (composer)
+
+5.- Vue 2.6.x
+
+# Instalacion de la app
+1.- Clonar o descargar la aplicacion
+
+2.- Situarse en la carpeta raiz de la aplicacion
+
+3.- Instalar las dependencias del composer (tener instalado composer en el Sistema Operativo)
+```
+composer install
+```
+
+4.- Instalar las dependencias del node_modules (tener instalado node en el Sistema Operativo)
+```
+npm install
+```
+
+5.- Especificar las variables de entorno para la conexion con la base de datos en el archivo .env, se puede copiar y pegar el archivo .env.example y despues renombrarlo a .env 
+```
+cp .env.example .env
+```
+
+6.- Crear la base de datos especificado en la variable de entorno anteriormente en el gestor de la base de datos(en este caso se utiliza mysql)
+
+
+7.- Hacer la migracion de la base de datos (crear las tablas)
+```
+php artisan migrate
+```
+
+7.1 Para cargar datos de pruebas ejuctar el siguiente comando
+```
+php artisan migrate:refresh --seed
+```
+
+8.- Probar la aplicacion
+```
+php artisan serve
+```
